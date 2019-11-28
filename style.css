@@ -1,3 +1,38 @@
+body {
+	padding: 2rem;
+	width: 100%;
+	margin: auto;
+	font-family: 'Aldrich';font-size: 22px;
+	border: .25rem solid black;
+	border-radius: 1rem;
+	background-color: #777;
+}
+
+html {
+	margin: 1rem;
+}
+
+
+h1 {
+	padding-bottom: 2rem;
+}
+
 #ex1Slider .slider-selection {
 	background: #BABABA;
+}
+
+.card-img-top {
+	width: 64px;
+	height: 64px;
+	padding: 3px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.card {
+	margin: 1rem;
+ } 
+
+#confirm-area {
+	padding-top: 3rem;
 }
