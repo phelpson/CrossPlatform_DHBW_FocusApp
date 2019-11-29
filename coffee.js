@@ -1,3 +1,3 @@
 window.onload = function(){
-    console.log("Up and running!");
+    console.log("Up and running!!");
 }
