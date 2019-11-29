@@ -16,7 +16,7 @@ window.onload = function () {
     console.log(age);
     // let weight
     
-    setGraph (age);
+    setGraph ();
 }
 
 
@@ -30,12 +30,18 @@ function calculateConsume () {
 }
 
 // Funktion zur Erstellung des Graphen
-function setGraph (age) {
+function setGraph () {
+    console.log("Graph initialisiert");
     var ctx = document.getElementById('myChart');
     var myRadarChart = new Chart(ctx, {
         type: 'radar',
-        data: data,
-        options: options
+        data: {
+            labels: ['Kaffee', 'Tee', 'Energy Drink', 'Cola'],
+            datasets: [{
+                data: [20, 10, 4, 2]
+            }]
+        }
     });
 }
+
 
