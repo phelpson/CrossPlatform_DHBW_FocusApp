@@ -5,12 +5,13 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="jquery/jquery-3.4.1.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
     <!-- Own Skript-->
-    <script src="javascript.js"></script>
+    <script src="rechnerJS.js"></script>
 
     
     <!-- CSS -->
@@ -25,7 +26,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
 </head>
 
 <body>
@@ -35,7 +35,7 @@
   <form>
         <div class="form-group">
           <label for="age">Bitte geben Sie Ihr Alter ein:</label>
-          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Alter">
+          <input type="number" id="age_input" class="form-control" placeholder="Alter">
         </div>
         <div class="form-group">
                 <label for="quantityCaffein">Bitte geben Sie die Anzahl der koffeinhaltigen Getränke ein:</label>
@@ -86,8 +86,6 @@
         </div>
         
       </form>
-
-
 
 </body>
 
