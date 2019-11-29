@@ -36,9 +36,14 @@ function setGraph () {
     var myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Kaffee', 'Tee', 'Energy Drink', 'Cola'],
+            labels: ['Kaffee', 'Tee', 'Energy Drink', 'Cola', 'Mate'],
             datasets: [{
-                data: [20, 10, 4, 2]
+                data: [10, 10, 4, 2, 8],
+                backgroundColor:'rgba(255, 0, 0, 0.25)',
+                borderColor: 'rgba(128, 0, 0, 0.25)',
+                pointBackgroundColor: 'rgba(0, 0, 0, 0.25)',
+                //hoverbackgroundColor: 'rgba(255, 0, 0, 0.4)'
+
             }]
         }
     });
