@@ -9,43 +9,58 @@ window.onload = function () {
     let session = window.localStorage.getItem("session");
     let sessionJSON = JSON.parse(session);
 
-    // Variablen befüllen
-    setVariables();
+    // Variablen intitialisieren und deklarieren
+    var kaffeeMenge;
+    var teeMenge;
+    var mateMenge;
+    var colaMenge;
+    var energyMenge;
+    var biggest;
+    setVariables(sessionJSON);
     
     //Graph erzeugen
-    setGraph ();
+    setGraph (sessionJSON);
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
 
 
 // Funktion zur Erstellung des Graphen
-function setGraph () {
-    console.log("Graph initialisiert");
+function setGraph (sessionJSON) {
+    console.log("Graph initialisiert");    
     var ctx = document.getElementById('myChart');
     var myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Kaffee', 'Tee', 'Energy Drink', 'Cola', 'Mate'],
+            labels: ['Kaffee', 'Tee', 'Mate', 'Energy Drink', 'Cola'],
             datasets: [{
-                data: [kaffeeMenge,teeMenge, energyMenge, colaMenge, mateMenge],
+                label: 'Dein Verbrauch',
+                data: [kaffeeMenge, teeMenge, mateMenge, energyMenge, colaMenge],
                 backgroundColor:'rgba(255, 0, 0, 0.25)',
                 borderColor: 'rgba(128, 0, 0, 0.25)',
-                pointBackgroundColor: 'rgba(0, 0, 0, 0.25)',
-                //hoverbackgroundColor: 'rgba(255, 0, 0, 0.4)'
-
+                pointBackgroundColor: 'rgba(0, 0, 0, 0.25)'              
             }]
+        },      
+        options: {
+            scale: {
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: (biggest + 1)
+                }
+            }
         }
     });
 }
 
 // Funktion zum Befüllen der Variablen
-function setVariables () {
-    let kaffeeMenge = JSON.parse(window.localStorage,getItem("kaffee"));
-    let teeMenge    = JSON.parse(window.localStorage,getItem("tee"));
-    let energyMenge = JSON.parse(window.localStorage,getItem("energy"));
-    let colaMenge   = JSON.parse(window.localStorage,getItem("cola"));
-    let mateMenge   = JSON.parse(window.localStorage,getItem("mate"));
+function setVariables (sessionJSON) {
+    console.log("Variablen befüllt");
+    kaffeeMenge = sessionJSON.coffee;
+    teeMenge    = sessionJSON.tea;
+    mateMenge   = sessionJSON.mate;
+    energyMenge = sessionJSON.energy; 
+    colaMenge   = sessionJSON.cola;
+    biggest     = Math.max(kaffeeMenge, teeMenge, mateMenge, energyMenge, colaMenge);
 }
 
 
