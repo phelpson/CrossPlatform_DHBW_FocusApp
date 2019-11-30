@@ -24,11 +24,6 @@ window.onload = function () {
 // ------------ Ausserhalb der Onload Funktion --------------------------
 
 
-// Funktion zur Berechnung 
-function calculateConsume () {
-
-}
-
 // Funktion zur Erstellung des Graphen
 function setGraph () {
     console.log("Graph initialisiert");

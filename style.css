@@ -36,3 +36,9 @@ h1 {
 #confirm-area {
 	padding-top: 3rem;
 }
+
+canvas {
+	background: #FFF;
+	border: 1px solid;
+	border-radius: .25rem;
+}
