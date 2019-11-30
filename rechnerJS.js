@@ -10,10 +10,11 @@ window.onload = function () {
         "age": 0,
         "weight": 65,
         "pregnant": false,
-        "drink": {
-            "type": "Energy Drink",
-            "quantity": 8
-        }
+        "coffee": 0,
+        "tea": 0,
+        "mate": 0,
+        "energy": 0,
+        "cola" : 0      
     }
     //let sessionJSON = JSON.stringify(session);
 
@@ -21,26 +22,65 @@ window.onload = function () {
     // Button On-Click Event
     confirmButton.onclick = function () {
         // Session wird gefüllt mit Werten aus den Input Feldern
+        //setze Alter
         session.age = document.getElementById("age_input").value;
         console.log(session.age);
+        // Setze Gewicht
+        session.weight = document.getElementById("weight_input").value;
+        // Setze Schwangerschaftsstatus
+        session.pregnant = document.getElementById("pregnantCheck").checked;
+        // Setze Kaffee Anzahl
+        session.coffee = document.getElementById("coffeeCount").innerHTML;
+        // Setze Tee Anzahl
+        session.tea = document.getElementById("teaCount").innerHTML;
+        // Setze Mate Anzahl
+        session.mate = document.getElementById("mateCount").innerHTML;
+        // Setze Energy Anzahl
+        session.energy = document.getElementById("energyCount").innerHTML;
+        console.log(session.energy);
+        // Setze Cola Anzahl
+        session.cola = document.getElementById("colaCount").innerHTML;
 
         // Local Storage wird einmalig mit dem Session Objekt befüllt
         window.localStorage.setItem("session", JSON.stringify(session));   
         
-        let dResultConsume = calculateConsume (session);
-        console.log("Calculate Consum complete." + dResultConsume);
+        //let dResultConsume = calculateConsume (session);
+        //console.log("Calculate Consum complete." + dResultConsume);
     }
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
 
+// Update Range State Value
+function updateTextInput(id,val) {
+    switch(id) {
+        case "energyRange": 
+        document.getElementById("energyCount").innerHTML = val;
+          break;
+        case "teaRange":
+            document.getElementById("teaCount").innerHTML = val;
+          break;
+          case "coffeeRange":
+            document.getElementById("coffeeCount").innerHTML = val;
+          break;
+          case "mateRange":
+            document.getElementById("mateCount").innerHTML = val;
+          break;
+          case "colaRange":
+            document.getElementById("colaCount").innerHTML = val;
+          break;
+        default:
+          // 
+      }
+    
+  }
 
 // Calculate Funktion
 function calculateConsume (session) {
     let iAge = session.age;
     let iWeight = session.weight;
     let bPregnant = session.pregnant;
-    let sDrinkType = session.drink.type;
+    
     let sDrinkQuant = session.drink.quantity;
 
     let dConsume = 0.0;                 // Zur Berechnung des Konsums in mg

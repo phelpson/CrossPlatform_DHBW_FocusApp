@@ -38,12 +38,8 @@
           <input type="number" id="age_input" class="form-control" placeholder="Alter">
         </div>
         <div class="form-group">
-                <label for="quantityCaffein">Bitte geben Sie die Anzahl der koffeinhaltigen Getränke ein:</label>
-                <input type="range" class="custom-range" data-slider-id='coffeeRange' id="coffeeRange" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14">
-        </div>
-        <div class="form-group">
                 <label for="quantityCaffein">Bitte geben Sie Ihr Gewicht ein:</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Gewicht in kg">
+                <input type="number" class="form-control" id="weight_input" placeholder="Gewicht in kg">
         </div>
 
         <div class="container">
@@ -52,8 +48,10 @@
               <div class="card">
                 <img src="img/coffee.png" class="card-img-top" alt="cup of cofffee">
                 <div class="card-body">
+                    <p id="coffeeCount">0</p>
                   <h5 class="card-title">Cup of Coffee</h5>
                   <p class="card-text">Caffein: 80mg per cup</p>
+                  <input type="range" class="custom-range" id="coffeeRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);"> 
                   <a href="#" class="btn btn-dark">Select</a>
                 </div>
               </div>
@@ -62,23 +60,54 @@
               <div class="card">
                 <img src="img/tea.png" class="card-img-top" alt="cup of tea">
                 <div class="card-body">
+                    <p id="teaCount">0</p>
                   <h5 class="card-title">Cup of Tea</h5>
                   <p class="card-text">Caffein: 20mg per cup</p>
+                  <input type="range" class="custom-range" id="teaRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);"> 
                   <a href="#" class="btn btn-dark">Select</a>
                 </div>
               </div>
             </div>
             <div class="col-sm">
               <div class="card">
-                <img src="img/energy.png" class="card-img-top" alt="can of energy drink">
+                <img src="img/energy.png" class="card-img-top" alt="can of energy drink">               
                 <div class="card-body">
+                  <p id="energyCount">0</p>
                   <h5 class="card-title">Can of Energy drink</h5>
-                  <p class="card-text">Caffein: 80mg per cup</p>
-                  <a href="#" class="btn btn-dark">Select</a>
+                  <p class="card-text">Caffein: 80mg per cup</p>                 
+                  <input type="range" class="custom-range" id="energyRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);">   
+                  <a href="#" class="btn btn-dark">Select</a>                 
                 </div>
               </div>
             </div>
+            <div class="col-sm">
+                <div class="card">
+                  <img src="img/energy.png" class="card-img-top" alt="can of cola">               
+                  <div class="card-body">
+                    <p id="colaCount">0</p>
+                    <h5 class="card-title">Can of Cola</h5>
+                    <p class="card-text">Caffein: 50mg per cup</p>                 
+                    <input type="range" class="custom-range" id="colaRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);">   
+                    <a href="#" class="btn btn-dark">Select</a>                 
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                  <div class="card">
+                    <img src="img/energy.png" class="card-img-top" alt="bottles of mate">               
+                    <div class="card-body">
+                      <p id="mateCount">0</p>
+                      <h5 class="card-title">Bottles of Mate</h5>
+                      <p class="card-text">Caffein: 120mg per cup</p>                 
+                      <input type="range" class="custom-range" id="mateRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);">   
+                      <a href="#" class="btn btn-dark">Select</a>                 
+                    </div>
+                  </div>
+                </div>
           </div>
+        </div>
+        <div>
+            <input type="checkbox" id="pregnantCheck" value=""> Schwanger?<br>
         </div>
 
         <div id="confirm-area">
