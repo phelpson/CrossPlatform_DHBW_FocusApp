@@ -16,7 +16,11 @@ window.onload = function () {
     var colaMenge;
     var energyMenge;
     var biggest;
-    setVariables(sessionJSON);
+    var tagesMenge;
+    var tagesMax;
+    var deltaResult;
+    setGraphVariables(sessionJSON);
+    getBlockVariables();
     
     //Graph erzeugen
     setGraph (sessionJSON);
@@ -64,8 +68,8 @@ function setGraph (sessionJSON) {
     };
 }
 
-// Funktion zum Befüllen der Variablen
-function setVariables (sessionJSON) {
+// Funktion zum Befüllen der Graphen Variablen
+function setGraphVariables (sessionJSON) {
     console.log("Variablen befüllt");
     kaffeeMenge = sessionJSON.coffee;
     teeMenge    = sessionJSON.tea;
@@ -74,5 +78,22 @@ function setVariables (sessionJSON) {
     colaMenge   = sessionJSON.cola;
     biggest     = Math.max(kaffeeMenge, teeMenge, mateMenge, energyMenge, colaMenge);
 }
+
+//Funktion zum Befüllen der Berechneten Werte
+function getBlockVariables () {
+    console.log("Variablen 2 gesetzt");
+    /*tagesMenge  = ;                                                             //Berechnete Tagesdosis
+    tagesMax = ;                                                                  //Berechnete maximale Tagesdosis
+    deltaResult =                                                                 //Über-/ Unterschreitung vom Tagesbedarf
+    */
+}    
+
+//Funktion zum Befüllen der HTML-Strucktur
+function setBlockVariables(){
+    console.log("Variablen 2 befüllt");
+    
+}
+
+
 
 
