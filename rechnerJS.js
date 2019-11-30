@@ -2,13 +2,16 @@ window.onload = function () {
     console.log('Dokument geladen');
 
     let confirmButton = document.getElementById("confirm-btn");
+    let clearButton = document.getElementById("clear-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
+
+    
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
         "age": 0,
-        "weight": 65,
+        "weight": 0,
         "pregnant": false,
         "coffee": 0,
         "tea": 0,
@@ -16,8 +19,34 @@ window.onload = function () {
         "energy": 0,
         "cola" : 0      
     }
-    //let sessionJSON = JSON.stringify(session);
-
+    // Überprüfen ob session bereits im local storage und Felder mit Werten vorbefüllen
+    if (localStorage.getItem("session") !== null) {
+        
+        let sessionPrefill = localStorage.getItem("session") 
+        let sessionPrefillJSON = JSON.parse(sessionPrefill);
+        // alter
+        document.getElementById("age_input").value = sessionPrefillJSON.age;
+        // gewicht
+        document.getElementById("weight_input").value = sessionPrefillJSON.weight;
+        // pregnant
+        document.getElementById("pregnantCheck").checked = sessionPrefillJSON.pregnant;
+        //coffee
+        document.getElementById("coffeeCount").innerHTML = sessionPrefillJSON.coffee;
+        document.getElementById("coffeeRange").value = sessionPrefillJSON.coffee;
+        //tea
+        document.getElementById("teaCount").innerHTML = sessionPrefillJSON.tea;
+        document.getElementById("teaRange").value = sessionPrefillJSON.tea;
+        //energy
+        document.getElementById("energyCount").innerHTML = sessionPrefillJSON.energy;
+        document.getElementById("energyRange").value = sessionPrefillJSON.energy;
+        //cola
+        document.getElementById("colaCount").innerHTML = sessionPrefillJSON.cola;
+        document.getElementById("colaRange").value = sessionPrefillJSON.cola;
+        //mate
+        document.getElementById("mateCount").innerHTML = sessionPrefillJSON.mate;
+        document.getElementById("mateRange").value = sessionPrefillJSON.mate;
+      }
+    
 
     // Button On-Click Event
     confirmButton.onclick = function () {
@@ -43,9 +72,16 @@ window.onload = function () {
 
         // Local Storage wird einmalig mit dem Session Objekt befüllt
         window.localStorage.setItem("session", JSON.stringify(session));   
+
+        window.location = "graph.html";
         
         //let dResultConsume = calculateConsume (session);
         //console.log("Calculate Consum complete." + dResultConsume);
+    }
+    // Clear Button Event
+    clearButton.onclick = function(){
+        localStorage.removeItem("session");
+        location.reload();
     }
 }
 
