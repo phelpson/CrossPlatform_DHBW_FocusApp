@@ -21,9 +21,11 @@ window.onload = function () {
     var deltaResult;
     setGraphVariables(sessionJSON);
     getBlockVariables();
-    
+        
     //Graph erzeugen
     setGraph (sessionJSON);
+    //Cards befüllen
+    setBlockVariables();
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
@@ -91,7 +93,9 @@ function getBlockVariables () {
 //Funktion zum Befüllen der HTML-Strucktur
 function setBlockVariables(){
     console.log("Variablen 2 befüllt");
-    
+    document.getElementById("maxConsume").innerHTML         = tagesMax;
+    document.getElementById("currentConsume").innerHTML     = tagesMenge;
+    document.getElementById("percentageConsume").innerHTML  = deltaResult;
 }
 
 
