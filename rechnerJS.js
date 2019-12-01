@@ -6,7 +6,11 @@ window.onload = function () {
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
 
-    
+    // Alle Werte im Input leeren, bevor die Seite gerendert wird
+    localStorage.removeItem("session");
+    localStorage.removeItem("sessionPrefillJSON");
+    document.getElementById("weight_input").value = "";
+    document.getElementById("age_input").value = "";
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
@@ -70,13 +74,15 @@ window.onload = function () {
         // Setze Cola Anzahl
         session.cola = document.getElementById("colaCount").innerHTML;
 
+        // Durchführung der Konsumberechnung
+        let dResultConsume = calculateConsume (session);
+        console.log("Calculate Consum complete." + dResultConsume);
+
+
         // Local Storage wird einmalig mit dem Session Objekt befüllt
-        window.localStorage.setItem("session", JSON.stringify(session));   
+        localStorage.setItem("session", JSON.stringify(session));   
 
         window.location = "graph.html";
-        
-        //let dResultConsume = calculateConsume (session);
-        //console.log("Calculate Consum complete." + dResultConsume);
     }
     // Clear Button Event
     clearButton.onclick = function(){
@@ -91,7 +97,7 @@ window.onload = function () {
 function updateTextInput(id,val) {
     switch(id) {
         case "energyRange": 
-        document.getElementById("energyCount").innerHTML = val;
+            document.getElementById("energyCount").innerHTML = val;
           break;
         case "teaRange":
             document.getElementById("teaCount").innerHTML = val;
@@ -117,7 +123,7 @@ function calculateConsume (session) {
     let iWeight = session.weight;
     let bPregnant = session.pregnant;
     
-    let sDrinkQuant = session.drink.quantity;
+    // let sDrinkQuant = session.drink.quantity;
 
     let dConsume = 0.0;                 // Zur Berechnung des Konsums in mg
     let sMessage = "";                  // Message-String fuer die Fehlerausgabe
@@ -138,35 +144,70 @@ function calculateConsume (session) {
         console.log('Konsum:' + dIndividualMaxConsume);
     }
 
-    // Switch-Case zur Verwaltung der Getraenke
-    switch (sDrinkType) {
-        case "Coffee": 
-            dConsume = sDrinkQuant * 80;
-            console.log("Konsum an Kaffee:" + dConsume);
-            break;
-        case 'Tea':
-            dConsume = sDrinkQuant * 20;
-            break;
-        case 'Energy Drink':
-            dConsume = sDrinkQuant * 30;
-            break;
-        default:
+    // Count Länge aller card Elemente für den Loop
+    let cardCount = document.querySelectorAll('.card').length;
+    console.log("Anzahl Cards: " + cardCount);
+
+    // Berechne Kaffeekonsum
+    dConsume = session.coffee * 80;
+    session.coffee = pregnantChecker(dConsume).toFixed(2);
+    
+    // Berechne Teekonsum
+    dConsume = session.tea * 20;
+    session.tea = pregnantChecker(dConsume).toFixed(2);
+
+    // Berechne Energy Drink Konsum
+    dConsume = session.energy * 30;
+    session.energy = pregnantChecker(dConsume).toFixed(2);
+
+    // Berechne Cola Konsum
+    dConsume = session.cola * 25;
+    session.cola = pregnantChecker(dConsume).toFixed(2);
+
+    // Berechne Mate Konsum
+    dConsume = session.mate * 100;
+    session.mate = pregnantChecker (dConsume).toFixed(2);
+
+    /* for(let i=0; i<cardCount; i++){
+        // Switch-Case zur Verwaltung der Getraenke
+        if (session.coffee != 0) {
+            dConsume = session.coffee * 80;
+            console.log("Konsum an Kaffee: " + dConsume);
+            continue;
+        }
+        else if (session.tea != 0) {
+            dConsume = session.tea * 20;
+            console.log("Konsum an Tee: " + dConsume);
+        }
+        else if (session.energy != 0) {
+            dConsume = session.energy * 30;
+            console.log("Konsum an Energy Drink: " + dConsume);
+        }
+        else if (session.mate != 0) {
+            dConsume = session.mate * 100;
+            console.log("Konsum an Mate: " + dConsume);
+        }
+        else {
             sMessage = "Es ist ein Fehler aufgetreten.";
             console.log("Fehler. Keiner der angelegten Drinks ausgewaehlt!");
             dConsume = 0.0;
-            break;
-    }
+        }
+    }    
+    */
     
-    // Pregnant-Flag beachten zur finalen Konsum Berechnung
-    if(!bPregnant)
-       { dResult = (dConsume / dIndividualMaxConsume) * 100;
-        console.log("Pregnant-Flag FALSE");}
-    else 
-        dResult =(dConsume / iMaxPregConsume) * 100;
-
+    function pregnantChecker (dConsume){
+        // Pregnant-Flag beachten zur finalen Konsum Berechnung
+        if(!bPregnant){ 
+            dResult = (dConsume / dIndividualMaxConsume) * 100;
+            console.log("Pregnant-Flag FALSE");
+        }
+        else
+            dResult =(dConsume / iMaxPregConsume) * 100;
+        return dResult;
+    }
 
     console.log("Gesamtbewertung:" + dResult);
     // Rueckgabwert fuer die prozentuale Ueber/Unterschreitung
-    return dResult;
+    return session;
 }
 
