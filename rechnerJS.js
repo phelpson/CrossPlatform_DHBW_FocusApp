@@ -3,14 +3,15 @@ window.onload = function () {
 
     let confirmButton = document.getElementById("confirm-btn");
     let clearButton = document.getElementById("clear-btn");
+    let helpButton = document.getElementById("help-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
 
     // Alle Werte im Input leeren, bevor die Seite gerendert wird
-    localStorage.removeItem("session");
-    localStorage.removeItem("sessionPrefillJSON");
-    document.getElementById("weight_input").value = "";
-    document.getElementById("age_input").value = "";
+    //localStorage.removeItem("session");
+    //localStorage.removeItem("sessionPrefillJSON");
+    //document.getElementById("weight_input").value = "";
+    //document.getElementById("age_input").value = "";
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
@@ -88,6 +89,11 @@ window.onload = function () {
     clearButton.onclick = function(){
         localStorage.removeItem("session");
         location.reload();
+    }
+    
+    // Help Button Event
+    helpButton.onclick = function(){
+        window.location = "help.html";
     }
 }
 
