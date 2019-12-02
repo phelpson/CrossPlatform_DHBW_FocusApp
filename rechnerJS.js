@@ -3,6 +3,7 @@ window.onload = function () {
 
     let confirmButton = document.getElementById("confirm-btn");
     let clearButton = document.getElementById("clear-btn");
+    let helpButton = document.getElementById("help-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
 
@@ -89,6 +90,10 @@ window.onload = function () {
         localStorage.removeItem("session");
         location.reload();
     }
+       // Help Button Event
+       helpButton.onclick = function(){
+        window.location = "help.html";
+    }
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
@@ -122,7 +127,7 @@ function calculateConsume (session) {
     let iAge = session.age;
     let iWeight = session.weight;
     let bPregnant = session.pregnant;
-    
+    let sMessage = "";                  // Message-String fuer die Fehlerausgabe
 
     let dConsume = 0.0;                 // Zur Berechnung des Konsums in mg
     let dMaxConsume = 5.7;              // empfohlener maximaler Tageskonsum pro KG in mg
@@ -143,21 +148,34 @@ function calculateConsume (session) {
         session.dDailyMaxConsume = dIndividualMaxConsume;       // Neuen Wert für maximaler Tageskonsum in mg im Session-JSON hinzufügen
         console.log('Konsum:' + dIndividualMaxConsume);
     }
+        // Count Länge aller card Elemente für den Loop
+        let cardCount = document.querySelectorAll('.card').length;
+        console.log("Anzahl Cards: " + cardCount);
+    
+    
 
     // Berechnungen für die unterschiedlichen Getränke (werden aufsummiert)
     // Berechne Kaffeekonsum
+    dConsume = session.coffee * 80;
+    session.coffee = pregnantChecker(dConsume).toFixed(2);
     dConsume = dConsume + (session.coffee * 80);
     dConsume = pregnantChecker(dConsume).toFixed(2);
     
     // Berechne Teekonsum
+    dConsume = session.tea * 20;
+    session.tea = pregnantChecker(dConsume).toFixed(2);
     dConsume = dConsume + (session.tea * 20);
     dConsume = pregnantChecker(dConsume).toFixed(2);
 
     // Berechne Energy Drink Konsum
+    dConsume = session.energy * 30;
+    session.energy = pregnantChecker(dConsume).toFixed(2);
     dConsume = dConsume + (session.energy * 30);
     dConsume = pregnantChecker(dConsume).toFixed(2);
 
     // Berechne Cola Konsum
+    dConsume = session.cola * 25;
+    session.cola = pregnantChecker(dConsume).toFixed(2);
     dConsume = dConsume + (session.cola * 25);
     dConsume = pregnantChecker(dConsume).toFixed(2);
 
@@ -180,5 +198,7 @@ function calculateConsume (session) {
     }
 
     console.log("Gesamtbewertung:" + dResult);
+    // Rueckgabwert fuer die prozentuale Ueber/Unterschreitung
+    return session;
 }
 

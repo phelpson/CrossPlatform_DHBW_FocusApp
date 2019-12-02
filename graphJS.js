@@ -4,11 +4,9 @@ window.onload = function () {
     let confirmButton = document.getElementById("confirm-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
-
     // Einmalig die Session aus dem Local Storage holen
     let session = window.localStorage.getItem("session");
     let sessionJSON = JSON.parse(session);
-
     // Variablen intitialisieren und deklarieren
     var kaffeeMenge;
     var teeMenge;
@@ -21,7 +19,8 @@ window.onload = function () {
     var deltaResult;
     setGraphVariables(sessionJSON);
     getBlockVariables();
-    
+        
+
     //Graph erzeugen
     setGraph (sessionJSON);
     //Cards befüllen
@@ -31,8 +30,6 @@ window.onload = function () {
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
-
-
 // Funktion zur Erstellung des Graphen
 function setGraph (sessionJSON) {
     console.log("Graph initialisiert");    
@@ -58,7 +55,6 @@ function setGraph (sessionJSON) {
             }
         }
     });
-
     myRadarChart.Tooltip.positioners.custom = function(elements, eventPosition) {
         /** @type {Chart.Tooltip} */
         var tooltip = this;
@@ -71,7 +67,6 @@ function setGraph (sessionJSON) {
         };
     };
 }
-
 // Funktion zum Befüllen der Graphen Variablen
 function setGraphVariables (sessionJSON) {
     console.log("Variablen befüllt");
@@ -82,7 +77,6 @@ function setGraphVariables (sessionJSON) {
     colaMenge   = sessionJSON.cola;
     biggest     = Math.max(kaffeeMenge, teeMenge, mateMenge, energyMenge, colaMenge);
 }
-
 //Funktion zum Befüllen der Berechneten Werte
 function getBlockVariables () {
     console.log("Variablen 2 gesetzt");
@@ -91,11 +85,13 @@ function getBlockVariables () {
     deltaResult =                                                                 //Über-/ Unterschreitung vom Tagesbedarf
     */
 }    
-
 //Funktion zum Befüllen der HTML-Strucktur
 function setBlockVariables(){
     console.log("Variablen 2 befüllt");
-    
+    document.getElementById("maxConsume").innerHTML         = tagesMax;
+    document.getElementById("currentConsume").innerHTML     = tagesMenge;
+    document.getElementById("percentageConsume").innerHTML  = deltaResult;
+
 }
 
 
