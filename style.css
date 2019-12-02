@@ -41,6 +41,7 @@ canvas {
 	background: #FFF;
 	border: 1px solid;
 	border-radius: .25rem;
+	width: 20%;
 }
 
 .accordion-section .panel-default > .panel-heading {

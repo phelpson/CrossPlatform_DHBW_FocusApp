@@ -7,11 +7,6 @@ window.onload = function () {
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
 
-    // Alle Werte im Input leeren, bevor die Seite gerendert wird
-    //localStorage.removeItem("session");
-    //localStorage.removeItem("sessionPrefillJSON");
-    //document.getElementById("weight_input").value = "";
-    //document.getElementById("age_input").value = "";
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
@@ -82,7 +77,7 @@ window.onload = function () {
 
         // Local Storage wird einmalig mit dem Session Objekt befüllt
         localStorage.setItem("session", JSON.stringify(session));   
-
+        // Navigation zu Graph
         window.location = "graph.html";
     }
     // Clear Button Event
