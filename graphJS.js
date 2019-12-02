@@ -18,14 +18,14 @@ window.onload = function () {
     var tagesMax;
     var deltaResult;
     setGraphVariables(sessionJSON);
-    getBlockVariables();
+    //getBlockVariables();
         
 
     //Graph erzeugen
     setGraph (sessionJSON);
     //Cards befüllen
-    setBlockVariables();
-    Chart.defaults.global.defaultFontColor = 'red';
+    //setBlockVariables();
+
 
 }
 
