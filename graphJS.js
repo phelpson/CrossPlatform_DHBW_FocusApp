@@ -26,6 +26,7 @@ window.onload = function () {
     setGraph (sessionJSON);
     //Cards befüllen
     setBlockVariables();
+    Chart.defaults.global.defaultFontColor = 'red';
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
