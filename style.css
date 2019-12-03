@@ -46,7 +46,7 @@ canvas {
 
 .accordion-section .panel-default > .panel-heading {
     border: 0;
-    background: #f4f4f4;
+    background: #777;
     padding: 0;
 }
 .accordion-section .panel-default .panel-title a {
@@ -72,6 +72,10 @@ canvas {
 
 .bg-light {
     background-color: #777!important;
+}
+
+a {
+	color: #f5f9fd;
 }
 
 
