@@ -4,11 +4,9 @@ window.onload = function () {
     let confirmButton = document.getElementById("confirm-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
-
     // Einmalig die Session aus dem Local Storage holen
     let session = window.localStorage.getItem("session");
     let sessionJSON = JSON.parse(session);
-
     // Variablen intitialisieren und deklarieren
     var kaffeeMenge;
     var teeMenge;
@@ -19,20 +17,25 @@ window.onload = function () {
     var tagesMenge;
     var tagesMax;
     var deltaResult;
+    var alter;
+    var gewicht;
+    var schwanger;
+
+    //Graph Variablen aus JSON Objekt holen
     setGraphVariables(sessionJSON);
-    getBlockVariables();
-        
+    //Block Variablen aus JSON Objekt holen
+    getBlockVariables(sessionJSON);
     //Graph erzeugen
-    setGraph (sessionJSON);
+    setGraph ();
     //Cards befüllen
     setBlockVariables();
+
+
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
-
-
 // Funktion zur Erstellung des Graphen
-function setGraph (sessionJSON) {
+function setGraph () {
     console.log("Graph initialisiert");    
     var ctx = document.getElementById('myChart');
     var myRadarChart = new Chart(ctx, {
@@ -56,20 +59,18 @@ function setGraph (sessionJSON) {
             }
         }
     });
-
-    myRadarChart.Tooltip.positioners.custom = function(elements, eventPosition) {
-        /** @type {Chart.Tooltip} */
+    /*myRadarChart.Tooltip.positioners.custom = function(elements, eventPosition) {
+        /** @type {Chart.Tooltip} 
         var tooltip = this;
     
-        /* ... */
+        /* ... 
     
         return {
             x: 0,
             y: 0
         };
-    };
+    };*/
 }
-
 // Funktion zum Befüllen der Graphen Variablen
 function setGraphVariables (sessionJSON) {
     console.log("Variablen befüllt");
@@ -80,22 +81,27 @@ function setGraphVariables (sessionJSON) {
     colaMenge   = sessionJSON.cola;
     biggest     = Math.max(kaffeeMenge, teeMenge, mateMenge, energyMenge, colaMenge);
 }
-
 //Funktion zum Befüllen der Berechneten Werte
-function getBlockVariables () {
+function getBlockVariables (sessionJSON) {
     console.log("Variablen 2 gesetzt");
-    /*tagesMenge  = ;                                                             //Berechnete Tagesdosis
-    tagesMax = ;                                                                  //Berechnete maximale Tagesdosis
-    deltaResult =                                                                 //Über-/ Unterschreitung vom Tagesbedarf
-    */
+    alter       = sessionJSON.age;                                          //Eingegebener Wert für Alter
+    gewicht     = sessionJSON.weight;                                       //Eingegebener Wert für Gewicht
+    schwanger   = sessionJSON.pregnant;                                     //Eingegebene Flag für schwanger
+    tagesMenge  = sessionJSON.dDailyConsume;                                //Berechnete Tagesdosis
+    tagesMax    = sessionJSON.dDailyMaxConsume;                             //Berechnete maximale Tagesdosis
+    deltaResult = sessionJSON.dOverUnderConsume;                            //Über-/ Unterschreitung vom Tagesbedarf
+    
 }    
-
 //Funktion zum Befüllen der HTML-Strucktur
 function setBlockVariables(){
     console.log("Variablen 2 befüllt");
-    document.getElementById("maxConsume").innerHTML         = tagesMax;
-    document.getElementById("currentConsume").innerHTML     = tagesMenge;
-    document.getElementById("percentageConsume").innerHTML  = deltaResult;
+    document.getElementById("inputValue").innerHTML        = ("Mit deinem eingegeben Alter von " + alter + " Jahren");
+    document.getElementById("inputValue_2").innerHTML      = ("und einem Gewicht von " + gewicht + " kg");
+    //document.getElementById("inputValue_3").innerHTML      = ();
+    document.getElementById("maxConsume").innerHTML         = (tagesMax + "g");
+    document.getElementById("currentConsume").innerHTML     = (tagesMenge + "g");
+    document.getElementById("percentageConsume").innerHTML  = (deltaResult + "%");
+
 }
 
 

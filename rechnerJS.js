@@ -6,6 +6,11 @@ window.onload = function () {
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
 
+    // Alle Werte im Input leeren, bevor die Seite gerendert wird
+    localStorage.removeItem("session");
+    localStorage.removeItem("sessionPrefillJSON");
+    document.getElementById("weight_input").value = "";
+    document.getElementById("age_input").value = "";
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
@@ -77,7 +82,7 @@ window.onload = function () {
 
         // Local Storage wird einmalig mit dem Session Objekt befüllt
         localStorage.setItem("session", JSON.stringify(session));   
-        // Navigation zu Graph
+
         window.location = "graph.html";
         }else{
             alert("Fehlerhafte Eingabe. Bitte überprüfe die Eingabefelder");
@@ -88,8 +93,10 @@ window.onload = function () {
         localStorage.removeItem("session");
         location.reload();
     }
-    
-    
+       // Help Button Event
+       helpButton.onclick = function(){
+        window.location = "help.html";
+    }
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
@@ -119,18 +126,27 @@ function updateTextInput(id,val) {
   }
 
 // Calculate Funktion
+function createModel() {
+    let drinkModel = {
+        "coffee": 80,
+        "tea": 20,
+        "mate": 100,
+        "cola": 25,
+        "energy": 100
+    }
+    return drinkModel;
+}
+
 function calculateConsume (session) {
     let iAge = session.age;
     let iWeight = session.weight;
     let bPregnant = session.pregnant;
-    
-    // let sDrinkQuant = session.drink.quantity;
+    let drinkModel = createModel();
 
-    let dConsume = 0.0;                 // Zur Berechnung des Konsums in mg
-    let sMessage = "";                  // Message-String fuer die Fehlerausgabe
     let dMaxConsume = 5.7;              // empfohlener maximaler Tageskonsum pro KG in mg
     let dMaxConsumeAge = 3;             // empfohlener maximaler Tageskonsum pro KG in mg entsprechend dem Alter (<18 oder >65)
     let iMaxPregConsume = 200;          // Maximaler Tageskonsum bei schwangeren Frauen
+    let dOverUnderConsume = 0.0;        // Koffein Über- Unterschreitung
 
     let dIndividualMaxConsume = 0.0;    // Variable fuer maximalen Konsum pro Person (Gewicht * Koffeinwert in mg)
     let dResult = 0.0;                  // Finale Ueber- Unterschreitung in Prozent
@@ -142,74 +158,43 @@ function calculateConsume (session) {
     }
     else {
         dIndividualMaxConsume = iWeight * dMaxConsume;          // Maximaler Konsum ohne Altersrestriktionen
+        session.dDailyMaxConsume = dIndividualMaxConsume;       // Neuen Wert für maximaler Tageskonsum in mg im Session-JSON hinzufügen
         console.log('Konsum:' + dIndividualMaxConsume);
     }
-
-    // Count Länge aller card Elemente für den Loop
-    let cardCount = document.querySelectorAll('.card').length;
-    console.log("Anzahl Cards: " + cardCount);
-
-    // Berechne Kaffeekonsum
-    dConsume = session.coffee * 80;
-    session.coffee = pregnantChecker(dConsume).toFixed(2);
+        // Count Länge aller card Elemente für den Loop
+        let cardCount = document.querySelectorAll('.card').length;
+        console.log("Anzahl Cards: " + cardCount);
     
-    // Berechne Teekonsum
-    dConsume = session.tea * 20;
-    session.tea = pregnantChecker(dConsume).toFixed(2);
-
-    // Berechne Energy Drink Konsum
-    dConsume = session.energy * 30;
-    session.energy = pregnantChecker(dConsume).toFixed(2);
-
-    // Berechne Cola Konsum
-    dConsume = session.cola * 25;
-    session.cola = pregnantChecker(dConsume).toFixed(2);
-
-    // Berechne Mate Konsum
-    dConsume = session.mate * 100;
-    session.mate = pregnantChecker (dConsume).toFixed(2);
-
-    /* for(let i=0; i<cardCount; i++){
-        // Switch-Case zur Verwaltung der Getraenke
-        if (session.coffee != 0) {
-            dConsume = session.coffee * 80;
-            console.log("Konsum an Kaffee: " + dConsume);
-            continue;
-        }
-        else if (session.tea != 0) {
-            dConsume = session.tea * 20;
-            console.log("Konsum an Tee: " + dConsume);
-        }
-        else if (session.energy != 0) {
-            dConsume = session.energy * 30;
-            console.log("Konsum an Energy Drink: " + dConsume);
-        }
-        else if (session.mate != 0) {
-            dConsume = session.mate * 100;
-            console.log("Konsum an Mate: " + dConsume);
-        }
-        else {
-            sMessage = "Es ist ein Fehler aufgetreten.";
-            console.log("Fehler. Keiner der angelegten Drinks ausgewaehlt!");
-            dConsume = 0.0;
-        }
-    }    
-    */
     
-    function pregnantChecker (dConsume){
-        // Pregnant-Flag beachten zur finalen Konsum Berechnung
+
+    // Berechnungen für die unterschiedlichen Getränke
+    let dConsumeCoffee  = session.coffee        * drinkModel.coffee;
+    let dConsumeTea     = session.tea           * drinkModel.tea;
+    let dConsumeMate    = session.mate          * drinkModel.mate;
+    let dConsumeCola    = session.cola          * drinkModel.cola;
+    let dConsumeEnergy  = session.energy        * drinkModel.energy;
+
+    let dTotalConsume = dConsumeCoffee + dConsumeTea + dConsumeMate + dConsumeCola + dConsumeEnergy;
+    dTotalConsume = parseFloat(pregnantChecker(dTotalConsume).toFixed(2));
+
+    // Prozentualer Über- Unterkonsum prüfen
+    dOverUnderConsume = parseFloat(Math.abs(dTotalConsume - 100).toFixed(2));
+    console.log(dOverUnderConsume);
+
+    // Zuweisung zum Session Model durch erstellen eines neuen Key-Value Paares
+    session.dDailyConsum = dTotalConsume;                 
+    session.dOverUnderConsume = dOverUnderConsume;  
+
+    // Innere Funktion zum Prüfen der Pregnant-Flag
+    function pregnantChecker (dTotalConsume){
         if(!bPregnant){ 
-            dResult = (dConsume / dIndividualMaxConsume) * 100;
+            dResult = (dTotalConsume / dIndividualMaxConsume) * 100;
             console.log("Pregnant-Flag FALSE");
         }
         else
-            dResult =(dConsume / iMaxPregConsume) * 100;
+            dResult =(dTotalConsume / iMaxPregConsume) * 100;
         return dResult;
     }
-
-    console.log("Gesamtbewertung:" + dResult);
-    // Rueckgabwert fuer die prozentuale Ueber/Unterschreitung
-    return session;
 }
 
 function checkForEmptyInput(){

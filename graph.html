@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="jquery/jquery-3.4.1.min.js"></script>
@@ -11,32 +9,40 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
     <script src="dist/Chart.js"></script>
-
     <!-- Own Skript-->
     <script src="graphJS.js"></script>
     
     <!-- CSS -->
     <link href="style.css" rel="stylesheet">
-
     <!-- Font -->
     <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
-
     <meta charset="utf-8">
     <title>Koffein-App-Rechner</title>
     <meta name="author" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 
 <body>
   <!-- Anzeige des Graphen-->
+
   <h1>Graph</h1>
+
+
   <canvas id="myChart" width="auto" height="auto"></canvas>
-  
+
    <!-- Anzeige der berechneten Werte-->
   <div class="container">
-    <div class="row">
+      <div class="col-sm">
+          <div class="card">
+            <div class="card-body">   
+              <p id="inputValue">Mit deinem eingegeben Alter von 20 Jahren</p>
+              <p id="inputValue_2">und einem Gewicht von 70kg</p>
+              <p id="inputValue_3">konnten wir folgende Werte für dich berechnen</p>  
+            </div>
+          </div>
+        </div>
+    <div class="row">  
       <div class="col-sm">
         <div class="card">
           <img src="img/max.png" class="card-img-top" alt="maxConsume">
@@ -71,5 +77,3 @@
   </div>
 
 </body>
-
-</html>

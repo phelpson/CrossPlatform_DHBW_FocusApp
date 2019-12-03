@@ -39,11 +39,10 @@ h1 {
 }
 
 canvas {
-	background: #FFF;
 	border: 1px solid;
 	border-radius: .25rem;
-	width: 20%;
 }
+
 
 .accordion-section .panel-default > .panel-heading {
     border: 0;
@@ -53,7 +52,7 @@ canvas {
 .accordion-section .panel-default .panel-title a {
     display: block;
     font-style: italic;
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 .accordion-section .panel-default .panel-title a:after {
     font-family: 'FontAwesome';
