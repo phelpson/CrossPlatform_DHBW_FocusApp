@@ -24,7 +24,7 @@ window.onload = function () {
         "cola" : 0      
     }
     // Überprüfen ob session bereits im local storage und Felder mit Werten vorbefüllen
-    if (localStorage.getItem("session") !== null && window.location == "index.html") {
+    if (localStorage.getItem("session") !== null) {
         
         let sessionPrefill = localStorage.getItem("session") 
         let sessionPrefillJSON = JSON.parse(sessionPrefill);
@@ -92,10 +92,6 @@ window.onload = function () {
     clearButton.onclick = function(){
         localStorage.removeItem("session");
         location.reload();
-    }
-       // Help Button Event
-       helpButton.onclick = function(){
-        window.location = "help.html";
     }
 }
 
@@ -203,10 +199,11 @@ function checkForEmptyInput(){
     let gewicht = document.getElementById("weight_input").value;
     console.log(alter + "" + gewicht);
 
-    if(alter === "" && gewicht === ""){
+    /*if(alter === "" && gewicht === ""){
         return false;
         
-    }
+    }*/
+    return true;
 
 
 }
