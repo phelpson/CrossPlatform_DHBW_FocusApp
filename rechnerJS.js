@@ -3,7 +3,6 @@ window.onload = function () {
 
     let confirmButton = document.getElementById("confirm-btn");
     let clearButton = document.getElementById("clear-btn");
-    let helpButton = document.getElementById("help-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
 
@@ -20,7 +19,7 @@ window.onload = function () {
         "cola" : 0      
     }
     // Überprüfen ob session bereits im local storage und Felder mit Werten vorbefüllen
-    if (localStorage.getItem("session") !== null) {
+    if (localStorage.getItem("session") !== null && window.location == "index.html") {
         
         let sessionPrefill = localStorage.getItem("session") 
         let sessionPrefillJSON = JSON.parse(sessionPrefill);
@@ -51,6 +50,7 @@ window.onload = function () {
     // Button On-Click Event
     confirmButton.onclick = function () {
         // Session wird gefüllt mit Werten aus den Input Feldern
+        if(checkForEmptyInput() === true){
         //setze Alter
         session.age = document.getElementById("age_input").value;
         console.log(session.age);
@@ -79,6 +79,9 @@ window.onload = function () {
         localStorage.setItem("session", JSON.stringify(session));   
         // Navigation zu Graph
         window.location = "graph.html";
+        }else{
+            alert("Fehlerhafte Eingabe. Bitte überprüfe die Eingabefelder");
+        }
     }
     // Clear Button Event
     clearButton.onclick = function(){
@@ -86,10 +89,7 @@ window.onload = function () {
         location.reload();
     }
     
-    // Help Button Event
-    helpButton.onclick = function(){
-        window.location = "help.html";
-    }
+    
 }
 
 // ------------ Ausserhalb der Onload Funktion --------------------------
@@ -210,5 +210,19 @@ function calculateConsume (session) {
     console.log("Gesamtbewertung:" + dResult);
     // Rueckgabwert fuer die prozentuale Ueber/Unterschreitung
     return session;
+}
+
+function checkForEmptyInput(){
+
+    let alter = document.getElementById("age_input").value;
+    let gewicht = document.getElementById("weight_input").value;
+    console.log(alter + "" + gewicht);
+
+    if(alter === "" && gewicht === ""){
+        return false;
+        
+    }
+
+
 }
 
