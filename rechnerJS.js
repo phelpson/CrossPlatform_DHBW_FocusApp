@@ -5,12 +5,6 @@ window.onload = function () {
     let clearButton = document.getElementById("clear-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
-
-    // Alle Werte im Input leeren, bevor die Seite gerendert wird
-    localStorage.removeItem("session");
-    localStorage.removeItem("sessionPrefillJSON");
-    document.getElementById("weight_input").value = "";
-    document.getElementById("age_input").value = "";
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
@@ -25,7 +19,6 @@ window.onload = function () {
     }
     // Überprüfen ob session bereits im local storage und Felder mit Werten vorbefüllen
     if (localStorage.getItem("session") !== null) {
-        
         let sessionPrefill = localStorage.getItem("session") 
         let sessionPrefillJSON = JSON.parse(sessionPrefill);
         // alter

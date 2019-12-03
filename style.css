@@ -70,4 +70,8 @@ canvas {
     font-size: 1.2rem;
 }
 
+.bg-light {
+    background-color: #777!important;
+}
+
 

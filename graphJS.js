@@ -2,6 +2,7 @@ window.onload = function () {
     console.log('Dokument geladen');
     
     let confirmButton = document.getElementById("confirm-btn");
+    let backButton = document.getElementById("back-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
     // Einmalig die Session aus dem Local Storage holen
@@ -30,6 +31,12 @@ window.onload = function () {
     //Cards befüllen
     setBlockVariables();
 
+    
+
+    // Zurück Button Event
+    backButton.onclick = function(){
+        window.location = "index.html";
+    }
 
 }
 
