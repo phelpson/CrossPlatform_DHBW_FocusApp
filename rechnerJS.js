@@ -147,14 +147,11 @@ function calculateConsume (session) {
     }
     else {
         dIndividualMaxConsume = iWeight * dMaxConsume;          // Maximaler Konsum ohne Altersrestriktionen
-        session.dDailyMaxConsume = dIndividualMaxConsume;       // Neuen Wert für maximaler Tageskonsum in mg im Session-JSON hinzufügen
         console.log('Konsum:' + dIndividualMaxConsume);
     }
-        // Count Länge aller card Elemente für den Loop
-        let cardCount = document.querySelectorAll('.card').length;
-        console.log("Anzahl Cards: " + cardCount);
     
-    
+    session.dDailyMaxConsume = dIndividualMaxConsume;       // Neuen Wert für maximaler Tageskonsum in mg im Session-JSON hinzufügen
+   
 
     // Berechnungen für die unterschiedlichen Getränke
     let dConsumeCoffee  = session.coffee        * drinkModel.coffee;
@@ -171,7 +168,7 @@ function calculateConsume (session) {
     console.log(dOverUnderConsume);
 
     // Zuweisung zum Session Model durch erstellen eines neuen Key-Value Paares
-    session.dDailyConsum = dTotalConsume;                 
+    session.dDailyConsume = dTotalConsume;                 
     session.dOverUnderConsume = dOverUnderConsume;  
 
     // Innere Funktion zum Prüfen der Pregnant-Flag

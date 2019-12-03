@@ -38,9 +38,14 @@ h1 {
 	padding-top: 3rem;
 }
 
-canvas {
-	border: 1px solid;
-	border-radius: .25rem;
+#myChart {
+	height: 25rem	!important;		/* Setze die größe des Canvas fix !!! */
+	width: 100% !important;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #f5f9fd;
 }
 
 

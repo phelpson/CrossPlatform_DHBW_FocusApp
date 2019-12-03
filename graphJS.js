@@ -50,7 +50,7 @@ function setGraph () {
         data: {
             labels: ['Kaffee', 'Tee', 'Mate', 'Energy Drink', 'Cola'],
             datasets: [{
-                label: 'Dein Verbrauch',
+                label: 'Dein Konsum',
                 data: [kaffeeMenge, teeMenge, mateMenge, energyMenge, colaMenge],
                 backgroundColor:'rgba(255, 0, 0, 0.25)',
                 borderColor: 'rgba(128, 0, 0, 0.25)',
@@ -62,8 +62,9 @@ function setGraph () {
                 ticks: {
                     suggestedMin: 0,
                     suggestedMax: (biggest + 1)
-                }
-            }
+                },
+            },
+            maintainAspectRatio: false
         }
     });
     /*myRadarChart.Tooltip.positioners.custom = function(elements, eventPosition) {
@@ -97,7 +98,6 @@ function getBlockVariables (sessionJSON) {
     tagesMenge  = sessionJSON.dDailyConsume;                                //Berechnete Tagesdosis
     tagesMax    = sessionJSON.dDailyMaxConsume;                             //Berechnete maximale Tagesdosis
     deltaResult = sessionJSON.dOverUnderConsume;                            //Über-/ Unterschreitung vom Tagesbedarf
-    
 }    
 //Funktion zum Befüllen der HTML-Strucktur
 function setBlockVariables(){
@@ -105,8 +105,8 @@ function setBlockVariables(){
     document.getElementById("inputValue").innerHTML        = ("Mit deinem eingegeben Alter von " + alter + " Jahren");
     document.getElementById("inputValue_2").innerHTML      = ("und einem Gewicht von " + gewicht + " kg");
     //document.getElementById("inputValue_3").innerHTML      = ();
-    document.getElementById("maxConsume").innerHTML         = (tagesMax + "g");
-    document.getElementById("currentConsume").innerHTML     = (tagesMenge + "g");
+    document.getElementById("maxConsume").innerHTML         = (tagesMax + "mg");
+    document.getElementById("currentConsume").innerHTML     = (tagesMenge + "mg");
     document.getElementById("percentageConsume").innerHTML  = (deltaResult + "%");
 
 }
