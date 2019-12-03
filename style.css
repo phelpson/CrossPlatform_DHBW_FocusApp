@@ -33,6 +33,16 @@ h1 {
 .card {
 	margin: 1rem;
  } 
+ .graph-card {
+	 width: 100%;
+	 border: 1px solid grey;
+	 border-radius: .5rem;
+	 background-color: #f5f9fd;	
+	 padding-right: 1rem;
+	 padding-left: 1rem;
+	 padding-top: 1rem;
+	 margin-top: 1rem;
+ }
 
 #confirm-area {
 	padding-top: 3rem;
@@ -46,6 +56,8 @@ h1 {
 	margin-right: auto;
 	margin-left: auto;
 	background-color: #f5f9fd;
+	border: 1px solid grey;
+	border-radius: .5rem;
 }
 
 
