@@ -6,7 +6,7 @@ body {
 	/*border: .25rem solid black;
 	padding: 2rem;
 	border-radius: 1rem;-*/
-	background-color: #777;
+	background-color: rgb(255, 255, 255);
 }
 
 html {
@@ -63,7 +63,7 @@ h1 {
 
 .accordion-section .panel-default > .panel-heading {
     border: 0;
-    background: #777;
+    background: rgb(255, 254, 254);
     padding: 0;
 }
 .accordion-section .panel-default .panel-title a {
@@ -88,11 +88,7 @@ h1 {
 }
 
 .bg-light {
-    background-color: #777!important;
-}
-
-a {
-	color: #f5f9fd;
+    background-color: rgb(255, 255, 255)!important;
 }
 
 

@@ -78,7 +78,7 @@ window.onload = function () {
 
         window.location = "graph.html";
         }else{
-            alert("Fehlerhafte Eingabe. Bitte überprüfe die Eingabefelder");
+            alert("Ungültige Eingabe. Bitte überprüfe die Eingabefelder!");
         }
     }
     // Clear Button Event
@@ -187,12 +187,19 @@ function checkForEmptyInput(){
 
     let alter = document.getElementById("age_input").value;
     let gewicht = document.getElementById("weight_input").value;
-    console.log(alter + "" + gewicht);
+    console.log(typeof(alter));
+    console.log(typeof(gewicht));
+    console.log(alter + " " + gewicht);
 
-    /*if(alter === "" && gewicht === ""){
-        return false;
+    if(!alter || !gewicht){
         
-    }*/
+        return false;
+    
+    }
+    
+    if(alter>99 || gewicht >200){
+        return false;
+    }
     return true;
 
 
