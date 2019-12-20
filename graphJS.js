@@ -31,6 +31,12 @@ window.onload = function () {
     //Cards befüllen
     setBlockVariables();
 
+    if (sessionJSON.dOverUnderConsume > 100.00) {
+        $('#percentageConsume').css('color', 'red');
+    } else {
+        $('#percentageConsume').css('color', 'green   ');
+    }
+
     
 
     // Zurück Button Event

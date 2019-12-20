@@ -32,6 +32,7 @@ h1 {
 
 .card {
 	margin: 1rem;
+	background-color: #f5f9fd;
  } 
  .graph-card {
 	 width: 100%;
@@ -90,3 +91,21 @@ h1 {
 .bg-light {
     background-color: rgb(255, 255, 255)!important;
 }
+
+.carousel, .carousel-inner {
+	width:640px;
+	height:360px;
+}
+
+img {
+	object-fit: contain;
+	max-width: 100%;
+	max-height: 100% !important;
+}
+
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+

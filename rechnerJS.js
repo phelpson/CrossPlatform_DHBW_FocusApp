@@ -1,6 +1,6 @@
 window.onload = function () {
     console.log('Dokument geladen');
-
+    $('.carousel').carousel('pause');
     let confirmButton = document.getElementById("confirm-btn");
     let clearButton = document.getElementById("clear-btn");
     let permanentStorage = window.localStorage;
