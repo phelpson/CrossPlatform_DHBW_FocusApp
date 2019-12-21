@@ -5,6 +5,7 @@ window.onload = function () {
     let clearButton = document.getElementById("clear-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
+    let errorMessage = 0;
     
     // Session befuellung - MOCK DATA - ausser Alter, wird direkt eingelesen.
     let session = {
@@ -48,35 +49,35 @@ window.onload = function () {
     // Button On-Click Event
     confirmButton.onclick = function () {
         // Session wird gefüllt mit Werten aus den Input Feldern
-        if(checkForEmptyInput() === true){
-        //setze Alter
-        session.age = document.getElementById("age_input").value;
-        console.log(session.age);
-        // Setze Gewicht
-        session.weight = document.getElementById("weight_input").value;
-        // Setze Schwangerschaftsstatus
-        session.pregnant = document.getElementById("pregnantCheck").checked;
-        // Setze Kaffee Anzahl
-        session.coffee = document.getElementById("coffeeCount").innerHTML;
-        // Setze Tee Anzahl
-        session.tea = document.getElementById("teaCount").innerHTML;
-        // Setze Mate Anzahl
-        session.mate = document.getElementById("mateCount").innerHTML;
-        // Setze Energy Anzahl
-        session.energy = document.getElementById("energyCount").innerHTML;
-        console.log(session.energy);
-        // Setze Cola Anzahl
-        session.cola = document.getElementById("colaCount").innerHTML;
+        if(checkForEmptyInput(errorMessage) === true){
+            //setze Alter
+            session.age = document.getElementById("age_input").value;
+            console.log(session.age);
+            // Setze Gewicht
+            session.weight = document.getElementById("weight_input").value;
+            // Setze Schwangerschaftsstatus
+            session.pregnant = document.getElementById("pregnantCheck").checked;
+            // Setze Kaffee Anzahl
+            session.coffee = document.getElementById("coffeeCount").innerHTML;
+            // Setze Tee Anzahl
+            session.tea = document.getElementById("teaCount").innerHTML;
+            // Setze Mate Anzahl
+            session.mate = document.getElementById("mateCount").innerHTML;
+            // Setze Energy Anzahl
+            session.energy = document.getElementById("energyCount").innerHTML;
+            console.log(session.energy);
+            // Setze Cola Anzahl
+            session.cola = document.getElementById("colaCount").innerHTML;
 
-        // Durchführung der Konsumberechnung
-        let dResultConsume = calculateConsume (session);
-        console.log("Calculate Consum complete." + dResultConsume);
+            // Durchführung der Konsumberechnung
+            let dResultConsume = calculateConsume (session);
+            console.log("Calculate Consum complete." + dResultConsume);
 
 
-        // Local Storage wird einmalig mit dem Session Objekt befüllt
-        localStorage.setItem("session", JSON.stringify(session));   
+            // Local Storage wird einmalig mit dem Session Objekt befüllt
+            localStorage.setItem("session", JSON.stringify(session));   
 
-        window.location = "graph.html";
+            window.location = "graph.html";
         }else{
             alert("Ungültige Eingabe. Bitte überprüfe die Eingabefelder!");
         }
@@ -161,10 +162,9 @@ function calculateConsume (session) {
     let dConsumeEnergy  = session.energy        * drinkModel.energy;
 
     let dTotalConsume = dConsumeCoffee + dConsumeTea + dConsumeMate + dConsumeCola + dConsumeEnergy;
-    dTotalConsume = parseFloat(pregnantChecker(dTotalConsume).toFixed(2));
 
     // Prozentualer Über- Unterkonsum prüfen
-    dOverUnderConsume = parseFloat(Math.abs(dTotalConsume - 100).toFixed(2));
+    dOverUnderConsume = parseFloat(pregnantChecker(dTotalConsume).toFixed(2));
     console.log(dOverUnderConsume);
 
     // Zuweisung zum Session Model durch erstellen eines neuen Key-Value Paares
@@ -183,24 +183,29 @@ function calculateConsume (session) {
     }
 }
 
-function checkForEmptyInput(){
+function checkForEmptyInput(errorMessage){
 
     let alter = document.getElementById("age_input").value;
     let gewicht = document.getElementById("weight_input").value;
     console.log(typeof(alter));
     console.log(typeof(gewicht));
     console.log(alter + " " + gewicht);
+    let bool = true;    // helper bool
 
-    if(!alter || !gewicht){
-        
-        return false;
-    
+    $("#age_input").css("border", "");
+    $("#weight_input").css("border", "");
+    // prüfe auf Alter ungleich leer und Alter älter als 99
+    if(!alter || alter>99){
+        $("#age_input").css("border", "1px solid red");     // setze Border auf Input Feld, um User aufmerksam darauf zu machen
+        bool = false; 
     }
-    
-    if(alter>99 || gewicht >200){
-        return false;
+
+    // prüfe Gewicht ungleich leer und Gewicht nicht schwerer als 200
+    if (!gewicht || gewicht >200 ){
+        $("#weight_input").css("border", "1px solid red");  // setze Border auf Input Feld, um User aufmerksam darauf zu machen
+        bool = false; 
     }
-    return true;
+    return bool;
 
 
 }
