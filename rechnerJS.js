@@ -121,7 +121,7 @@ function createModel() {
         "coffee": 80,
         "tea": 20,
         "mate": 100,
-        "cola": 25,
+        "cola": 83,
         "energy": 100
     }
     return drinkModel;
@@ -130,7 +130,7 @@ function createModel() {
 function calculateConsume (session) {
     let iAge = session.age;
     let iWeight = session.weight;
-    let bPregnant = session.pregnant;
+    let bPregnant = session.pregnant;   // Wert für Pregnant speichern
     let drinkModel = createModel();
 
     let dMaxConsume = 5.7;              // empfohlener maximaler Tageskonsum pro KG in mg
@@ -151,7 +151,7 @@ function calculateConsume (session) {
         console.log('Konsum:' + dIndividualMaxConsume);
     }
     
-    session.dDailyMaxConsume = dIndividualMaxConsume;       // Neuen Wert für maximaler Tageskonsum in mg im Session-JSON hinzufügen
+    session.dDailyMaxConsume = parseFloat(dIndividualMaxConsume.toFixed(2));       // Neuen Wert für maximaler Tageskonsum in mg im Session-JSON hinzufügen
    
 
     // Berechnungen für die unterschiedlichen Getränke
@@ -167,18 +167,21 @@ function calculateConsume (session) {
     dOverUnderConsume = parseFloat(pregnantChecker(dTotalConsume).toFixed(2));
     console.log(dOverUnderConsume);
 
-    // Zuweisung zum Session Model durch erstellen eines neuen Key-Value Paares
-    session.dDailyConsume = dTotalConsume;                 
-    session.dOverUnderConsume = dOverUnderConsume;  
+    // Zuweisung zum Session Model durch erstellen eines neuen Key-Value Paares               
+    session.dOverUnderConsume = dOverUnderConsume; 
 
     // Innere Funktion zum Prüfen der Pregnant-Flag
     function pregnantChecker (dTotalConsume){
         if(!bPregnant){ 
             dResult = (dTotalConsume / dIndividualMaxConsume) * 100;
+            session.dDailyConsume = parseFloat(dTotalConsume.toFixed(2));;  
             console.log("Pregnant-Flag FALSE");
         }
-        else
+        else {
             dResult =(dTotalConsume / iMaxPregConsume) * 100;
+            session.dDailyConsume = dTotalConsume;  
+            session.dDailyMaxConsume = parseFloat(iMaxPregConsume.toFixed(2));     // Ausnahme für schwangere - Max 200mg pro Tag
+        }
         return dResult;
     }
 }

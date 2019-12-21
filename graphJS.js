@@ -36,7 +36,6 @@ window.onload = function () {
     } else {
         $('#percentageConsume').css('color', 'green   ');
     }
-
     
 
     // Zurück Button Event
@@ -108,12 +107,15 @@ function getBlockVariables (sessionJSON) {
 //Funktion zum Befüllen der HTML-Strucktur
 function setBlockVariables(){
     console.log("Variablen 2 befüllt");
-    document.getElementById("inputValue").innerHTML        = ("Mit deinem eingegeben Alter von " + alter + " Jahren");
-    document.getElementById("inputValue_2").innerHTML      = ("und einem Gewicht von " + gewicht + " kg");
-    //document.getElementById("inputValue_3").innerHTML      = ();
-    document.getElementById("maxConsume").innerHTML         = (tagesMax + "mg");
-    document.getElementById("currentConsume").innerHTML     = (tagesMenge + "mg");
-    document.getElementById("percentageConsume").innerHTML  = (deltaResult + "%");
+    document.getElementById("inputValue").innerHTML                 = ("Mit deinem eingegeben Alter von " + alter + " Jahren");
+    document.getElementById("inputValue_2").innerHTML               = ("und einem Gewicht von " + gewicht + " kg");
+    if (schwanger) {
+        document.getElementById("inputValue_pregnant").innerHTML    = ("Achtung: Schwangerschaftshinweise beachten!");
+        $("inputValue_pregnant").css("color", "red");
+    }
+    document.getElementById("maxConsume").innerHTML                 = (tagesMax + "mg");
+    document.getElementById("currentConsume").innerHTML             = (tagesMenge + "mg");
+    document.getElementById("percentageConsume").innerHTML          = (deltaResult + "%");
 
 }
 
