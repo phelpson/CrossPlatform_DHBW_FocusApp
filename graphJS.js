@@ -3,6 +3,7 @@ window.onload = function () {
     
     let confirmButton = document.getElementById("confirm-btn");
     let backButton = document.getElementById("back-btn");
+	let shareButton = document.getElementById("share-btn");
     let permanentStorage = window.localStorage;
     let tempStorage = window.sessionStorage;
     // Einmalig die Session aus dem Local Storage holen
@@ -41,6 +42,9 @@ window.onload = function () {
     // Zurück Button Event
     backButton.onclick = function(){
         window.location = "index.html";
+    }
+	 shareButton.onclick = function(){
+        Screenshot();
     }
 
 }
@@ -118,6 +122,14 @@ function setBlockVariables(){
     document.getElementById("percentageConsume").innerHTML          = (deltaResult + "%");
 
 }
+
+function Screenshot() {
+	window.plugins.socialsharing.share('Hey, schau mal wie viel Koffein ich mir heute schon reingezogen habe! Insgesamt '+ tagesMenge+'mg Koffein! Ich habe dafür ' + kaffeeMenge +' Kaffee, '+mateMenge+' Mate', 'Ziehs dir rein Bruder')
+	//window.plugins.socialsharing.share("Hey, schaut euch meinen heutigen Koffeinkonsum an!", null, "file://"+response.filePath);
+	//window.plugins.socialsharing.shareViaTwitter('Message via Twitter');
+}
+
+
 
 
 
