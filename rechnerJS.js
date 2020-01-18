@@ -119,9 +119,9 @@ function updateTextInput(id,val) {
 function createModel() {
     let drinkModel = {
         "coffee": 80,
-        "tea": 20,
+        "tea": 22,
         "mate": 100,
-        "cola": 83,
+        "cola": 24,
         "energy": 100
     }
     return drinkModel;
