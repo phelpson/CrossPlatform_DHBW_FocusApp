@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="jquery/jquery-3.4.1.min.js"></script>
     <script src="jquery-ui/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
     <!-- Own Skript-->
@@ -66,7 +66,7 @@
               <div class="card h-100 my-4">
                 <img src="img/coffee.png" class="card-img-top" alt="cup of cofffee">
                 <div class="card-body">
-                    <p id="coffeeCount">0</p>
+                    <p id="coffeeCount" class="drinkCount">0</p>
                   <h5 class="card-title">Cups of Coffee</h5>
                   <p class="card-text">Caffein: 80mg per cup</p>
                   <input type="range" class="custom-range" id="coffeeRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);"> 
@@ -77,7 +77,7 @@
               <div class="card h-100">
                 <img src="img/tea.png" class="card-img-top" alt="cup of tea">
                 <div class="card-body">
-                    <p id="teaCount">0</p>
+                    <p id="teaCount" class="drinkCount">0</p>
                   <h5 class="card-title">Cups of Tea</h5>
                   <p class="card-text">Caffein: 20mg per cup</p>
                   <input type="range" class="custom-range" id="teaRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);"> 
@@ -88,7 +88,7 @@
               <div class="card h-100">
                 <img src="img/energy.png" class="card-img-top" alt="can of energy drink">               
                 <div class="card-body">
-                  <p id="energyCount">0</p>
+                  <p id="energyCount" class="drinkCount">0</p>
                   <h5 class="card-title">Cans of Energy drink</h5>
                   <p class="card-text">Caffein: 100mg per can</p>                 
                   <input type="range" class="custom-range" id="energyRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);">                    
@@ -99,7 +99,7 @@
                 <div class="card h-100">
                   <img src="img/coke-bottle.png" class="card-img-top" alt="bottle of cola">               
                   <div class="card-body">
-                    <p id="colaCount">0</p>
+                    <p id="colaCount" class="drinkCount">0</p>
                     <h5 class="card-title">Bottles of Cola</h5>
                     <p class="card-text">Caffein: 83mg per bottle</p>                 
                     <input type="range" class="custom-range" id="colaRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);">                   
@@ -110,7 +110,7 @@
                   <div class="card h-100">
                     <img src="img/mate.png" class="card-img-top" alt="bottles of mate">               
                     <div class="card-body">
-                      <p id="mateCount">0</p>
+                      <p id="mateCount" class="drinkCount">0</p>
                       <h5 class="card-title">Bottles of Mate</h5>
                       <p class="card-text">Caffein: 100mg per bottle</p>                 
                       <input type="range" class="custom-range" id="mateRange" min="0" max="10" data-slider-step="1" value="0" onchange="updateTextInput(this.id,this.value);">                   

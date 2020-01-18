@@ -13,6 +13,10 @@ html {
 	margin: 1rem;
 }
 
+.drinkCount {
+	text-align: center;
+	color: red;
+}
 
 h1 {
 	padding-bottom: 2rem;

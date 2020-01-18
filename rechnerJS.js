@@ -197,14 +197,14 @@ function checkForEmptyInput(errorMessage){
 
     $("#age_input").css("border", "");
     $("#weight_input").css("border", "");
-    // prüfe auf Alter ungleich leer und Alter älter als 99
-    if(!alter || alter>99){
+    // prüfe auf Alter ungleich leer, Alter älter als 99 und Alter nicht negativ
+    if(!alter || alter>99 || alter <=0){
         $("#age_input").css("border", "1px solid red");     // setze Border auf Input Feld, um User aufmerksam darauf zu machen
         bool = false; 
     }
 
-    // prüfe Gewicht ungleich leer und Gewicht nicht schwerer als 200
-    if (!gewicht || gewicht >200 ){
+    // prüfe Gewicht ungleich leer, Gewicht nicht schwerer als 200 und Gewicht nicht negativ
+    if (!gewicht || gewicht >200 || gewicht <= 0){
         $("#weight_input").css("border", "1px solid red");  // setze Border auf Input Feld, um User aufmerksam darauf zu machen
         bool = false; 
     }

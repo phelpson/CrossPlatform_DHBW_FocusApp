@@ -114,9 +114,11 @@ function setBlockVariables(){
     document.getElementById("inputValue").innerHTML                 = ("Mit deinem eingegeben Alter von " + alter + " Jahren");
     document.getElementById("inputValue_2").innerHTML               = ("und einem Gewicht von " + gewicht + " kg");
     if (schwanger) {
-        document.getElementById("inputValue_pregnant").innerHTML    = ("Achtung: Schwangerschaftshinweise beachten!");
-        $("inputValue_pregnant").css("color", "red");
+        document.getElementById("inputValue_pregnant").innerHTML    = ("Achtung: Schwangerschaftshinweise beachten - Maximalkonsum 200mg!");
+        $("#inputValue_pregnant").css("color", "red");
     }
+    else
+        $("#inputValue_pregnant").css("color", "green");
     document.getElementById("maxConsume").innerHTML                 = (tagesMax + "mg");
     document.getElementById("currentConsume").innerHTML             = (tagesMenge + "mg");
     document.getElementById("percentageConsume").innerHTML          = (deltaResult + "%");
